@@ -125,7 +125,7 @@
       true,
       "call-signature",
       "parameter",
-      "arrow-call-signature",
+      // "arrow-call-signature",
       "arrow-parameter",
       "property-declaration"
     ],
