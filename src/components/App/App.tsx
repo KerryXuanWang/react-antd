@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
         <Content>
           <div className="content-area">
-            <Route exact path="/" component={Counter} />
+            <Route exact={true} path="/" component={Counter} />
             <Route path="/setting" component={Setting} />
           </div>
         </Content>
