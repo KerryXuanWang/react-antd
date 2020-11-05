@@ -33,7 +33,7 @@ const reducer: React.Reducer<IState, IAction> = (state: IState, action: IAction)
   }
 };
 
-const Counter = () => {
+const Counter: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
