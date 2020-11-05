@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Card, IProfile } from './Card';
+import AddCard from './AddCard';
 
 it('It should mount', () => {
   const div = document.createElement('div');
-  const profile = {} as IProfile;
-
-  ReactDOM.render(<Card {...profile} />, div);
+  ReactDOM.render(<AddCard />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -8,6 +8,8 @@ import './App.scss';
 
 import Counter from '../Counter/Counter';
 
+import Github from '../Github/Github';
+
 import Setting from '../Setting/Setting';
 
 const App: React.FC = () => {
@@ -30,6 +32,10 @@ const App: React.FC = () => {
               Count
               <Link to="/" />
             </Menu.Item>
+            <Menu.Item key="github">
+              Github
+              <Link to="/github" />
+            </Menu.Item>
             <Menu.Item key="setting">
               Setting
               <Link to="/setting" />
@@ -40,6 +46,7 @@ const App: React.FC = () => {
         <Content>
           <div className="content-area">
             <Route exact={true} path="/" component={Counter} />
+            <Route path="/github" component={Github} />
             <Route path="/setting" component={Setting} />
           </div>
         </Content>
