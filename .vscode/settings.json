@@ -17,5 +17,8 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "editor.formatOnSave": true
 }
