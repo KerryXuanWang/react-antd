@@ -1,33 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Card, Avatar } from 'antd';
+import * as Yup from 'yup';
 
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Form, TextField, SelectField, SubmitButton } from '../Form/Form';
 
-const { Meta } = Card;
+import './Setting.scss';
 
 const Setting: React.FC = () => {
+  const [formData] = useState({
+    name: '',
+    email: '',
+    role: '',
+  });
+
+  const onSubmit = (values: any) => {
+    console.log(values);
+  };
+
+  const formSchema = Yup.object().shape({
+    name: Yup.string()
+      .required('Required')
+      .min(5, 'Min length is 5'),
+    email: Yup.string()
+      .email()
+      .required('Required')
+      .min(1, 'Min length is 1'),
+    role: Yup.string()
+      .oneOf(['admin', 'user'])
+      .required('Required')
+      .min(1, 'At least one role'),
+  });
+
   return (
-    <Card
-      style={{ width: 300 }}
-      cover={
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
-      }
-      actions={[
-        <SettingOutlined key="setting" />,
-        <EditOutlined key="edit" />,
-        <EllipsisOutlined key="ellipsis" />,
-      ]}
-    >
-      <Meta
-        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-        title="Card title"
-        description="This is the description"
-      />
-    </Card>
+    <>
+      <Form
+        enableReinitialize={false}
+        initialValues={formData}
+        validationSchema={formSchema}
+        onSubmit={onSubmit}
+      >
+        <div>
+          <div className="p12">
+            <TextField name="name" label="Name" />
+          </div>
+
+          <div className="p12">
+            <TextField name="email" label="Email" />
+          </div>
+
+          <div className="p12">
+            <SelectField
+              name="role"
+              label="Role"
+              options={[
+                {
+                  label: 'Admin',
+                  value: 'admin',
+                },
+                {
+                  label: 'User',
+                  value: 'user',
+                },
+              ]}
+            />
+          </div>
+
+          <div className="p12">
+            <SubmitButton title="Submit" />
+          </div>
+        </div>
+      </Form>
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const { Header, Footer, Content } = Layout;
 
   const hrefList = window.location.href.split('/');
-  const currentKey = hrefList[hrefList.length - 1] || 'count';
+  const currentKey = hrefList[hrefList.length - 1] || 'github';
 
   return (
     <Router>
@@ -30,11 +30,11 @@ const App: React.FC = () => {
           >
             <Menu.Item key="count">
               Count
-              <Link to="/" />
+              <Link to="/count" />
             </Menu.Item>
             <Menu.Item key="github">
               Github
-              <Link to="/github" />
+              <Link to="/" />
             </Menu.Item>
             <Menu.Item key="setting">
               Setting
@@ -45,8 +45,8 @@ const App: React.FC = () => {
 
         <Content>
           <div className="content-area">
-            <Route exact={true} path="/" component={Counter} />
-            <Route path="/github" component={Github} />
+            <Route path="/count" component={Counter} />
+            <Route exact={true} path="/" component={Github} />
             <Route path="/setting" component={Setting} />
           </div>
         </Content>

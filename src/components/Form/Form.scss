@@ -1,0 +1,11 @@
+.row {
+  display: flex;
+
+  label {
+    width: 150px;
+  }
+
+  .ant-input {
+    max-width: 500px;
+  }
+}

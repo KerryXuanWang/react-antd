@@ -14,5 +14,8 @@
   "html.format.endWithNewline": true,
   "html.format.wrapLineLength": 100,
   "java.configuration.updateBuildConfiguration": "automatic",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
   "editor.formatOnSave": true
 }

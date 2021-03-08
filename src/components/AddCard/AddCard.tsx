@@ -34,7 +34,7 @@ export class AddCard extends React.Component<ISubmitProps, IUserState> {
 
   render(): JSX.Element {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="row-center" onSubmit={this.handleSubmit}>
         <Input
           type="text"
           value={this.state.name}
