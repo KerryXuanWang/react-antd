@@ -126,7 +126,7 @@
       "call-signature",
       "parameter",
       // "arrow-call-signature",
-      "arrow-parameter",
+      // "arrow-parameter",
       "property-declaration"
     ],
     "no-consecutive-blank-lines": true

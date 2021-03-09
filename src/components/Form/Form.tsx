@@ -84,6 +84,29 @@ export const SelectField = (props: ISelectField) => {
   );
 };
 
+export interface IRadio extends IBasicDesc {
+  value: string;
+}
+export interface IRadioField {
+  radios: IRadio[];
+}
+export const RadioField = (props: IRadioField) => {
+  const { radios } = props;
+
+  return (
+    <div role="group" aria-labelledby="my-radio-group">
+      {radios.map((o) => {
+        return (
+          <label key={`${o.label}-${o.value}`}>
+            <Field type="radio" name={o.name} value={o.value} />
+            {o.label}
+          </label>
+        );
+      })}
+    </div>
+  );
+};
+
 export interface IButton {
   title: string;
   [x: string]: any;
