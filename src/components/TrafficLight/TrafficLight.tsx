@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import './TrafficLight.scss';
 
@@ -39,6 +39,8 @@ const TrafficLightItem: React.FC<ILight> = (props) => {
 const TrafficLight: React.FC = () => {
   const [lightStatus, setLightStatus] = useState([...LIGHTS]);
 
+  const requestRef = useRef(0);
+
   const stateChange = {
     red: 'green',
     green: 'yellow',
@@ -61,7 +63,7 @@ const TrafficLight: React.FC = () => {
 
     const nowTime = getCurrentTime();
     if (nowTime - startTime < duration) {
-      window.requestAnimationFrame(onStateChange);
+      requestRef.current = requestAnimationFrame(onStateChange);
       return;
     }
 
@@ -71,12 +73,16 @@ const TrafficLight: React.FC = () => {
 
     startTime = getCurrentTime();
     setLightStatus([...lightStatus]);
+    requestRef.current = requestAnimationFrame(onStateChange);
   }
 
-  requestAnimationFrame(onStateChange);
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(onStateChange);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []);
 
   return (
-    <div className="container">
+    <div className="traffic-light-container">
       {lightStatus.map((l, index) => {
         return <TrafficLightItem key={index} {...l} />;
       })}
