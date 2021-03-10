@@ -12,6 +12,8 @@ import Github from '../Github/Github';
 
 import Setting from '../Setting/Setting';
 
+import TrafficLight from '../TrafficLight/TrafficLight';
+
 const App: React.FC = () => {
   const { Header, Footer, Content } = Layout;
 
@@ -40,6 +42,10 @@ const App: React.FC = () => {
               Setting
               <Link to="/setting" />
             </Menu.Item>
+            <Menu.Item key="traffic-light">
+              Traffic Light
+              <Link to="/traffic-light" />
+            </Menu.Item>
           </Menu>
         </Header>
 
@@ -48,6 +54,7 @@ const App: React.FC = () => {
             <Route path="/count" component={Counter} />
             <Route exact={true} path="/" component={Github} />
             <Route path="/setting" component={Setting} />
+            <Route path="/traffic-light" component={TrafficLight} />
           </div>
         </Content>
 
