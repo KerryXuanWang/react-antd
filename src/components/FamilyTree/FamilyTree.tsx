@@ -1,32 +1,10 @@
-import React, {
-  useState,
-  createContext,
-  useContext,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import React, { useContext } from 'react';
 
-import axios from 'axios';
+import { isArray } from 'lodash';
 
-import { cloneDeep } from 'lodash';
-
-import { v4 as uuidv4 } from 'uuid';
+import { Context, IFamilyTree } from '../FamilyTreeWrapper/FamilyTreeWrapper';
 
 import './FamilyTree.scss';
-
-export interface IFamilyTree {
-  name: string;
-  children?: IFamilyTree[];
-}
-
-export interface IContext {
-  treeData: IFamilyTree[];
-  setTreeData: Dispatch<SetStateAction<IFamilyTree[]>>;
-}
-
-const Context: React.Context<IContext> = createContext({} as IContext);
-let SOURCE_DATA: IFamilyTree[];
 
 // 深度优先删除
 function traverseTreeDFS(node: IFamilyTree, stack: IFamilyTree[]) {
@@ -48,59 +26,39 @@ function traverseTreeDFS(node: IFamilyTree, stack: IFamilyTree[]) {
   }
 }
 
-// 广度优先查找
-function traverseTreeBFS(node: IFamilyTree) {
-  const stack = cloneDeep(SOURCE_DATA); // 用于存放所有待处理节点
+function LoopTree(trees: IFamilyTree[] | undefined) {
+  const { treeData, setTreeData, sourceData, setSourceData } = useContext(Context);
 
-  if (!node || !node.name) {
-    return stack;
-  }
-
-  const result = []; // 存放遍历后的结果
-  let tmpNode: IFamilyTree; // 当前正在被处理的节点
-
-  while (stack.length) {
-    tmpNode = stack.shift() as IFamilyTree;
-    if (tmpNode.name === node.name) {
-      result.push(tmpNode);
-    }
-    if (tmpNode.children && tmpNode.children.length) {
-      tmpNode.children.map((item) => stack.push(item));
-    }
-  }
-
-  return result;
-}
-
-function LoopTree(arr: IFamilyTree[] | undefined) {
-  // const { treeData, setTreeData } = useContext(Context);
-
-  if (!Array.isArray(arr)) {
+  if (!isArray(trees)) {
     return null;
   }
 
-  return arr.map((obj) => {
+  const image = './assets/times-circle-solid.svg';
+
+  return trees.map((obj, index) => {
     const res = [];
     const { name, children } = obj;
 
-    // const handleClick = (val: string, e: any) => {
-    //   traverseTreeDFS({ name: val }, treeData);
-    //   setTreeData([...treeData]);
-    // };
+    const handleClick = (val: string) => {
+      traverseTreeDFS({ name: val }, treeData);
+      traverseTreeDFS({ name: val }, sourceData);
+      setTreeData([...treeData]);
+      setSourceData([...sourceData]);
+    };
 
     if (!children) {
       res.push(
-        <div key={uuidv4()}>
+        <div key={`siblings-${name}`}>
           {name}
-          {/* <img src={image} className="delete" onClick={(e) => handleClick(name, e)} /> */}
+          <img src={image} className="delete" onClick={(e) => handleClick(name)} />
         </div>,
       );
     } else {
       res.push(
-        <React.Fragment key={uuidv4()}>
+        <React.Fragment key={`siblings-${name}`}>
           <div>
             {name}
-            {/* <img src={image} className="delete" onClick={(e) => handleClick(name, e)} /> */}
+            <img src={image} className="delete" onClick={(e) => handleClick(name)} />
           </div>
           <div className="siblings">{LoopTree(children)}</div>
         </React.Fragment>,
@@ -108,7 +66,7 @@ function LoopTree(arr: IFamilyTree[] | undefined) {
     }
 
     return (
-      <div key={uuidv4()} className="container">
+      <div key={`container-loop-${index}`} className="container">
         {res}
       </div>
     );
@@ -116,35 +74,21 @@ function LoopTree(arr: IFamilyTree[] | undefined) {
 }
 
 const FamilyTree: React.FC = () => {
-  const [treeData, setTreeData] = useState(SOURCE_DATA);
-
-  async function getData() {
-    const res = await axios.get<IFamilyTree[]>('http://localhost:3000/assets/family.json');
-
-    SOURCE_DATA = res.data;
-    setTreeData(SOURCE_DATA);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const { treeData } = useContext(Context);
 
   return (
-    <Context.Provider value={{ treeData, setTreeData }}>
-      <div className="FamilyTree">
-        {treeData &&
-          treeData.map((o) => {
-            return (
-              <div key={uuidv4()} className="siblings">
-                <div className="container">
-                  <div>{o.name}</div>
-                  <div className="siblings">{LoopTree(o.children)}</div>
-                </div>
-              </div>
-            );
-          })}
-      </div>
-    </Context.Provider>
+    <div className="FamilyTree">
+      {treeData.map((o) => {
+        return (
+          <div key={`siblings-${o.name}`} className="siblings">
+            <div className="container">
+              <div>{o.name}</div>
+              <div className="siblings">{LoopTree(o.children)}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

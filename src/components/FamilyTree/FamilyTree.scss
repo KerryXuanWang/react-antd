@@ -1,4 +1,7 @@
 .FamilyTree {
+  border: 1px dotted greenyellow;
+  margin-top: 50px;
+
   div {
     text-align: center;
     padding: 5px 0;
@@ -34,11 +37,5 @@
     margin-top: -10px;
     margin-right: -2px;
     visibility: hidden;
-  }
-
-  .search-container {
-    padding-left: 10px;
-    text-align: left;
-    border: none !important;
   }
 }
