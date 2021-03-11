@@ -1,0 +1,22 @@
+[
+  {
+    "name": "爷爷",
+    "children": [
+      {
+        "name": "爸爸",
+        "children": [
+          {
+            "name": "我",
+            "children": [{ "name": "儿子" }, { "name": "女儿" }]
+          },
+          { "name": "妹妹" },
+          { "name": "哥哥" }
+        ]
+      },
+      {
+        "name": "叔叔",
+        "children": [{ "name": "堂兄" }, { "name": "堂妹" }]
+      }
+    ]
+  }
+]

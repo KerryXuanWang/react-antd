@@ -14,6 +14,8 @@ import Setting from '../Setting/Setting';
 
 import TrafficLight from '../TrafficLight/TrafficLight';
 
+import FamilyTree from '../FamilyTree/FamilyTree';
+
 const App: React.FC = () => {
   const { Header, Footer, Content } = Layout;
 
@@ -46,6 +48,10 @@ const App: React.FC = () => {
               Traffic Light
               <Link to="/traffic-light" />
             </Menu.Item>
+            <Menu.Item key="family-tree">
+              Family Tree
+              <Link to="/family-tree" />
+            </Menu.Item>
           </Menu>
         </Header>
 
@@ -55,6 +61,7 @@ const App: React.FC = () => {
             <Route exact={true} path="/" component={Github} />
             <Route path="/setting" component={Setting} />
             <Route path="/traffic-light" component={TrafficLight} />
+            <Route path="/family-tree" component={FamilyTree} />
           </div>
         </Content>
 

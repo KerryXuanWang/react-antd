@@ -1,0 +1,44 @@
+.FamilyTree {
+  div {
+    text-align: center;
+    padding: 5px 0;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .container > div:nth-child(1) {
+    border: 1px solid gray;
+    margin: 10px;
+  }
+  .container > div:nth-child(1):hover {
+    background-color: #87cefa;
+  }
+  .container > div:nth-child(1):hover .delete {
+    visibility: visible;
+  }
+  .container .siblings {
+    display: flex;
+    flex-direction: row;
+    border: none;
+  }
+  .container .siblings > div {
+    flex-grow: 1;
+  }
+
+  .delete {
+    float: right;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    margin-top: -10px;
+    margin-right: -2px;
+    visibility: hidden;
+  }
+
+  .search-container {
+    padding-left: 10px;
+    text-align: left;
+    border: none !important;
+  }
+}

@@ -123,7 +123,7 @@
     ],
     "typedef": [
       true,
-      "call-signature",
+      // "call-signature",
       "parameter",
       // "arrow-call-signature",
       // "arrow-parameter",
