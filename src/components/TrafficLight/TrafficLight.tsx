@@ -9,6 +9,10 @@ export interface ILight {
   active?: boolean;
 }
 
+export function getCurrentTime(): number {
+  return window.performance.now() || Date.now();
+}
+
 const LIGHTS: ILight[] = [
   {
     color: 'red',
@@ -46,10 +50,6 @@ const TrafficLight: React.FC = () => {
     green: 'yellow',
     yellow: 'red',
   };
-
-  function getCurrentTime(): number {
-    return window.performance.now() || Date.now();
-  }
 
   let startTime = getCurrentTime();
 

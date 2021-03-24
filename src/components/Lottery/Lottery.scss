@@ -1,0 +1,25 @@
+.Lottery {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1%;
+    grid-auto-flow: row;
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2em;
+      border: 1px solid #e5e4e9;
+    }
+
+    .active {
+      background-color: aqua;
+    }
+  }
+}

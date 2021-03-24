@@ -16,6 +16,8 @@ import TrafficLight from '../TrafficLight/TrafficLight';
 
 import FamilyTreeWrapper from '../FamilyTreeWrapper/FamilyTreeWrapper';
 
+import Lottery from '../Lottery/Lottery';
+
 const App: React.FC = () => {
   const { Header, Footer, Content } = Layout;
 
@@ -52,6 +54,10 @@ const App: React.FC = () => {
               Family Tree
               <Link to="/family-tree" />
             </Menu.Item>
+            <Menu.Item key="lottery">
+              Lottery
+              <Link to="/lottery" />
+            </Menu.Item>
           </Menu>
         </Header>
 
@@ -62,6 +68,7 @@ const App: React.FC = () => {
             <Route path="/setting" component={Setting} />
             <Route path="/traffic-light" component={TrafficLight} />
             <Route path="/family-tree" component={FamilyTreeWrapper} />
+            <Route path="/lottery" component={Lottery} />
           </div>
         </Content>
 
